@@ -1,10 +1,10 @@
 #include <stdio.h>
 /**
- * main - C program that prings with proper grammer
- * Return: 0 (taskcompleted)
+ * main - Entry point
+ * Return: always 0 (Sucess)
  */
 int main(void)
 {
-     printf("with proper grammar, but the outcome is a piece of art,\n");
-     return (0); 
- }
+	printf("with proper grammar, but the outcome is a piece of art,\n");
+	return (0);
+}
