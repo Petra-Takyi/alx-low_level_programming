@@ -4,30 +4,23 @@
 /**
   *main - Entry point
   *Description: 'print possible combination of two two-digits numbers'
-  *Return: always 0 (sucess)
+  *Return: always 0 is good
   */
 int main(void)
 {
-	int l, h;
-	int h, q;
+	int p, q;
 
-	for (l = 0; h <= 98; l++)
-	for (h = 0; h <= 98; h++)
+	for (p = 0; p <= 98; p++)
 	{
 
-	for (h = l + 1; h <= 99; h++)
-	for (q = h + 1; q <= 99; q++)
+	for (q = p + 1; q <= 99; q++)
 	{
-	putchar((l / 10) + '0');
-	putchar((l % 10) + '0');
-	putchar(' ');
-	putchar((h / 10) + '0');
-	putchar((h % 10) + '0');
-	if (l == 98 && h == 99)
+	putchar((p / 10) + '0');
+	putchar((p % 10) + '0');
 	putchar(' ');
 	putchar((q / 10) + '0');
 	putchar((q % 10) + '0');
-	if (h == 98 && q == 99)
+	if (p == 98 && q == 99)
 	continue;
 	putchar(',');
 	putchar(' ');
@@ -36,3 +29,4 @@ int main(void)
 	putchar('\n');
 	return (0);
 }
+
