@@ -2,7 +2,6 @@
 
 /**
   * print_alphabet - prints alphabets in lowercase
-  *
   * Return: void (sucess)
   */
 
