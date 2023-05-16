@@ -1,42 +1,102 @@
 #include "main.h"
 #include <stdlib.h>
 
+int word_len(char *str);
+int count_words(char *str);
+char **strtow(char *str);
+
 /**
- * argstostr - main entry
- * @ac: int input
- * @aq: double pointer array
- * Return: 0
+ * word_len - Locates the index marking the end of the
+ *            first word contained within a string.
+ * @str: The string to be searched.
+ *
+ * Return: The index marking the end of the initial word pointed to by str.
  */
-
-char *argstostr(int ac, char **aq)
+int word_len(char *str)
 {
-	int a, n, t = 0, l = 0;
-	char *str;
+	int h = 0, len = 0;
 
-	if (ac == 0 || aq == NULL)
+	while (*(str + h) && *(str + h) != ' ')
+	{
+		len++;
+		h++;
+	}
+
+	return (len);
+}
+
+/**
+ * count_words - Counts the number of words contained within a string.
+ * @str: The string to be searched.
+ *
+ * Return: The number of words contained within str.
+ */
+int count_words(char *str)
+{
+	int h = 0, words = 0, len = 0;
+
+	for (h = 0; *(str + h); h++)
+		len++;
+
+	for (h = 0; h < len; h++)
+	{
+		if (*(str + h) != ' ')
+		{
+			words++;
+			h += word_len(str + h);
+		}
+	}
+
+	return (words);
+}
+
+/**
+ * strtow - Splits a string into words.
+ * @str: The string to be split.
+ *
+ * Return: If str = NULL, str = "", or the function fails - NULL.
+ *         Otherwise - a pointer to an array of strings (words).
+ */
+char **strtow(char *str)
+{
+	char **strings;
+	int h = 0, words, w, letters, l;
+
+	if (str == NULL || str[0] == '\0')
 		return (NULL);
 
-	for (a = 0; a < ac; a++)
-	{
-		for (n = 0; aq[a][n]; n++)
-			l++;
-	}
-	l += ac;
-
-	str = malloc(sizeof(char) * l + 1);
-	if (str == NULL)
+	words = count_words(str);
+	if (words == 0)
 		return (NULL);
-	for (a = 0; a < ac; a++)
+
+	strings = malloc(sizeof(char *) * (words + 1));
+	if (strings == NULL)
+		return (NULL);
+
+	for (w = 0; w < words; w++)
 	{
-	for (n = 0; aq[a][n]; n++)
-	{
-		str[t] = aq[a][n];
-		t++;
+		while (str[h] == ' ')
+			h++;
+
+		letters = word_len(str + h);
+
+		strings[w] = malloc(sizeof(char) * (letters + 1));
+
+		if (strings[w] == NULL)
+		{
+			for (; w >= 0; w--)
+				free(strings[w]);
+
+			free(strings);
+			return (NULL);
+		}
+
+		for (l = 0; l < letters; l++)
+			strings[w][l] = str[h++];
+
+		strings[w][l] = '\0';
 	}
-	if (str[t] == '\0')
-	{
-		str[t++] = '\n';
-	}
-	}
-	return (str);
+	strings[w] = NULL;
+
+	return (strings);
 }
