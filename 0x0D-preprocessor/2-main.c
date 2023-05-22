@@ -1,16 +1,13 @@
 #include <stdio.h>
+#include "1-pi.h"
 
 /**
- * main - Entry point
+ * main - Prints the name of the file
  *
- * Return: Always 0 (sucess)
+ * Return: Always 0.
  */
-
 int main(void)
 {
-	char filename[10] = "2-main.c";
-
-	printf("%s\n", filename);
-
+	printf("%s\n", __FILE__);
 	return (0);
 }
